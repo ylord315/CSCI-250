@@ -1,0 +1,36 @@
+import csv
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import urllib
+
+#acess web link and create into a file
+link = "https://raw.githubusercontent.com/datasets/gdp/0be54c18d900edc37123f25b4eff014731c9e459/data/gdp.csv "
+#file = urllib.request.urlopen(link)
+
+#Read CSV linkand store infomation in Pandas dataframe
+df = pd.read_csv(link)
+
+
+#Retrieve x and y values for each country
+d_china = df.loc[df['Country Name'] == 'China']
+x_china = d_china['Year'].values
+y_china = d_china['Value'].values
+
+d_eu = df.loc[df['Country Name'] == 'European Union']
+x_eu = d_eu['Year'].values
+y_eu = d_eu['Value'].values
+
+d_usa = df.loc[df['Country Name'] == 'United States']
+x_usa = d_usa['Year'].values
+y_usa = d_usa['Value'].values
+
+#Design plot
+plt.title("Yuriko Lord GDP Plot")
+plt.xlabel("Year")
+plt.ylabel("GDP")
+plt.plot(x_china, y_china, color = 'red')
+plt.plot(x_eu, y_eu, color = 'green')
+plt.plot(x_usa, y_usa, color = 'blue')
+plt.legend(["China", "EU", "USA"])
+plt.show()
